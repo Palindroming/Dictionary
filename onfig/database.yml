@@ -1,0 +1,23 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  # Docker PostgreSQL 연결 설정
+  host: localhost
+  port: 5432
+  username: postgres
+  password: password
+
+development:
+  <<: *default
+  database: vocabulary_app_development
+
+test:
+  <<: *default
+  database: vocabulary_app_test
+
+production:
+  <<: *default
+  database: vocabulary_app_production
+  username: vocabulary_app
+  password: <%= ENV['VOCABULARY_APP_DATABASE_PASSWORD'] %>
